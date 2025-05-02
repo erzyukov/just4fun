@@ -2,6 +2,7 @@ namespace Ecrys.Installers
 {
 	using Ecrys.Core;
 	using Ecrys.Managers;
+	using Game.Managers;
 	using Zenject;
 
 
@@ -44,6 +45,10 @@ namespace Ecrys.Installers
 
 		private void Install_Input()
 		{
+			// InputManager
+			Container
+				.BindInterfacesTo< InputManager >()
+				.AsSingle();
 		}
 
 		private void Install_Factories()
