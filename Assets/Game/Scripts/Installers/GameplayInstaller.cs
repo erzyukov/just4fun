@@ -1,4 +1,4 @@
-namespace Ecrys.Installers
+namespace Game.Installers
 {
 	using Game.Camera;
 	using Zenject;
