@@ -1,6 +1,7 @@
 namespace Ecrys.Installers
 {
 	using Game.Camera;
+	using Game.Inputs;
 	using Zenject;
 
 
@@ -12,6 +13,12 @@ namespace Ecrys.Installers
 			Container
 				.BindInterfacesTo<GameplayCamera>()
 				.FromComponentInHierarchy()
+				.AsSingle();
+
+
+			// DragCameraController
+			Container
+				.BindInterfacesTo<DragCameraController>()
 				.AsSingle();
 		}
 	}
