@@ -1,53 +1,36 @@
 namespace Game.Inputs
 {
 	using Game.Camera;
+	using Game.Core;
+	using R3;
+	using System;
 	using UnityEngine;
 	using UnityEngine.EventSystems;
 	using Zenject;
 
-	public class DragCameraController : ITickable
+	public class DragCameraController : IInitializable, IDisposable
 	{
 		[Inject] IGameplayCamera _camera;
+		[Inject] GameplayModel _gameplayModel;
+
+		private CompositeDisposable _disposables = new();
 
 		private Vector2 lastTouchPosition;
 		private bool isDragging = false;
-		public float dragSpeed = 0.2f;
+		public float dragSpeed = 0.01f;
 
-		public void Tick()
+		public void Initialize()
 		{
-			Debug.Log("Tick()");
-			int tc = Input.touchCount;
-			Debug.Log("Input.touchCount = " + tc);
-			if (Input.touchCount > 0)
-			{
-				Touch touch = Input.GetTouch(0);
+			_gameplayModel.TouchDelta.Subscribe(OnTouchDeltaChanged).AddTo(_disposables);
+		}
 
-				// Провверим, не над UI ли тач
-				//if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-				//	return;
+		public void Dispose() => _disposables.Dispose();
 
-				switch (touch.phase)
-				{
-					case TouchPhase.Began:
-						lastTouchPosition = touch.position;
-						isDragging = true;
-						break;
-
-					case TouchPhase.Moved:
-						if (isDragging)
-						{
-							Vector2 delta = touch.position - lastTouchPosition;
-							Vector3 move = new Vector3(-delta.x, -delta.y, 0) * dragSpeed * Time.deltaTime;
-							Vector3 pos = _camera.Transform.position;
-							_camera.SetPosition(pos + move);
-						}
-						break;
-					case TouchPhase.Ended:
-					case TouchPhase.Canceled:
-						isDragging = false;
-						break;
-				}
-			}
+		private void OnTouchDeltaChanged(Vector2 delta)
+		{
+			Vector3 move = new Vector3(delta.x, 0, delta.y) * dragSpeed;
+			Vector3 pos = _camera.Transform.position;
+			_camera.SetPosition(pos + move);
 		}
 	}
 }

@@ -523,19 +523,19 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "c383aa09-72e8-45f0-bad4-eb1014c6c652",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "581acf4e-6b4c-4ca0-8c73-7ba149e43f59",
-                    "path": "<Touchscreen>/Press",
+                    "path": "<Touchscreen>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
