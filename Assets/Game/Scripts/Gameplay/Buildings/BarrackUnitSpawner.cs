@@ -1,13 +1,18 @@
 ﻿namespace Game.Buildings
 {
+	using Ecrys.Configs;
+	using Game.Units;
 	using R3;
 	using System;
-	using UnityEngine;
 	using Zenject;
+
 
 	public class BarrackUnitSpawner : IInitializable, IDisposable
 	{
-		[Inject] private IBuildingView _view;
+		[Inject] private IBuildingView				_view;
+		[Inject] private UnitFacade.Factory			_unitFacadeFactory;
+		[Inject] private PrefabsConfig				_config;
+
 
 		private const float StartSpawnDelay = 1;
 		private const float SpawnDelay = 5;
@@ -25,7 +30,14 @@
 
 		private void SpawnUnit()
 		{
-			Debug.LogWarning( $" >> Unit spawned at {_view.SpawnPoint.position}" );
+			var type	= EUnit.Warrior;
+
+			var unit	= _unitFacadeFactory.Create( new() {
+				Prefab	= _config.Units[ type ],
+				Type	= type,
+			} );
+
+			unit.SetPosition( _view.SpawnPoint.position );
 		}
 	}
 }

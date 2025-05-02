@@ -1,6 +1,7 @@
 namespace Game.Installers
 {
 	using Game.Camera;
+	using Game.Units;
 	using Zenject;
 
 
@@ -13,6 +14,12 @@ namespace Game.Installers
 				.BindInterfacesTo<GameplayCamera>()
 				.FromComponentInHierarchy()
 				.AsSingle();
+
+			Install_Factories();
+		}
+
+		private void Install_Factories()
+		{
 		}
 	}
 }

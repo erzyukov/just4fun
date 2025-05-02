@@ -22,6 +22,7 @@ namespace Ecrys.Installers
 
 			// Technical
 			Container.BindInstance( rc.ScenesConfig );
+			Container.BindInstance( rc.PrefabsConfig );
 			
 			// Modules
 

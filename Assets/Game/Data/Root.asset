@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Root
   m_EditorClassIdentifier: 
   ScenesConfig: {fileID: 11400000, guid: 08e489f879dee0f4d956281eccd592c8, type: 2}
+  PrefabsConfig: {fileID: 11400000, guid: 33a21b8e7e5156c499189d541ef37c4d, type: 2}

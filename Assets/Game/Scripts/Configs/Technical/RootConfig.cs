@@ -9,5 +9,6 @@ namespace Ecrys.Configs
 	{
 		[Header("Technical")]
 		public ScenesConfig				ScenesConfig;
+		public PrefabsConfig			PrefabsConfig;
 	}
 }
