@@ -9,6 +9,7 @@
 		{
 			public Transform	Prefab;
 			public EUnit		Type;
+			public ETeam		Team;
 		}
 
 		[Inject] DiContainer		_container;
@@ -17,6 +18,9 @@
 		{
 			_container.Unbind<EUnit>();
 			_container.BindInstance( args.Type );
+
+			_container.Unbind<ETeam>();
+			_container.BindInstance( args.Team );
 
 			IUnitFacade unit	= _container.InstantiatePrefabForComponent<IUnitFacade>( args.Prefab );
 

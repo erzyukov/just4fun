@@ -9,6 +9,7 @@
 	[CreateAssetMenu( fileName = "Prefabs", menuName = "Configs/Prefabs", order = (int)EConfig.Prefabs )]
 	public class PrefabsConfig : SerializedScriptableObject
 	{
-		public Dictionary<EUnit, Transform>	Units		= new();
+		public Dictionary<EUnit, Transform>			Units			= new();
+		public Dictionary<EBuilding, Transform>		Buildings		= new();
 	}
 }

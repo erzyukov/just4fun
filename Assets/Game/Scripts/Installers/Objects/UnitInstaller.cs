@@ -1,9 +1,9 @@
 namespace Game.Installers
 {
-	using UnityEngine;
 	using UnityEngine.AI;
 	using Zenject;
 	using Game.Units;
+
 
 	public class UnitInstaller : MonoInstaller
 	{
