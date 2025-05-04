@@ -1,21 +1,12 @@
 namespace Game.Buildings
 {
-	using UnityEngine;
 	using Zenject;
 
 
-	public interface ICastleFacade
+	public interface ICastleFacade : IBuildingFacadeBase { }
+
+	public class CastleFacade : BuildingFacadeBase, ICastleFacade
 	{
-		ETeam Team { get; }
-		Transform Transform { get; }
-	}
-
-	public class CastleFacade : MonoBehaviour, ICastleFacade
-	{
-		[SerializeField] private ETeam _team;
-
-		public ETeam Team => _team;
-
-		public Transform Transform => transform;
+		public class Factory : PlaceholderFactory<CastleFacadeFactory.Args, ICastleFacade> { }
 	}
 }

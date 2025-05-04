@@ -12,6 +12,7 @@
 	{
 		[Inject] private List<IBuildingSpawnPlaceholder>	_placeholders;
 		[Inject] private BarrackFacade.Factory				_barrackFactory;
+		[Inject] private CastleFacade.Factory				_castleFactory;
 		[Inject] private PrefabsConfig						_config;
 
 		private CompositeDisposable _disposables = new();
@@ -25,20 +26,30 @@
 
 		private void InitBuilding( IBuildingSpawnPlaceholder placeholder )
 		{
+			IBuildingFacadeBase building;
+
 			switch ( placeholder.Building )
 			{
 				case EBuilding.Barrack:
-					var building = _barrackFactory.Create( new() {
+					building = _barrackFactory.Create( new() {
 						Prefab		= _config.Buildings[ placeholder.Building ],
 						Team		= placeholder.Team,
 					} );
-					building.Transform.position = placeholder.Position;
+					break;
+
+				case EBuilding.Castle:
+					building = _castleFactory.Create( new() {
+						Prefab		= _config.Buildings[ placeholder.Building ],
+						Team		= placeholder.Team,
+					} );
 					break;
 
 				default:
+					building = null;
 					break;
 			}
 
+			building.Transform.position = placeholder.Position;
 			placeholder.Remove();
 		}
 	}

@@ -46,10 +46,16 @@ namespace Game.Installers
 
 		private void Install_Factories()
 		{
-			// UnitFacade.Factory
+			// BarrackFacade.Factory
 			Container
 				.BindFactory<BarrackFacadeFactory.Args, IBarrackFacade, BarrackFacade.Factory>()
 				.FromFactory<BarrackFacadeFactory>()
+				.CopyIntoDirectSubContainers();
+
+			// CastleFacade.Factory
+			Container
+				.BindFactory<CastleFacadeFactory.Args, ICastleFacade, CastleFacade.Factory>()
+				.FromFactory<CastleFacadeFactory>()
 				.CopyIntoDirectSubContainers();
 		}
 	}
