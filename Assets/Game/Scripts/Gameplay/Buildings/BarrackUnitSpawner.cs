@@ -9,6 +9,7 @@
 
 	public class BarrackUnitSpawner : IInitializable, IDisposable
 	{
+		[Inject] private ETeam						_team;
 		[Inject] private IBuildingView				_view;
 		[Inject] private UnitFacade.Factory			_unitFacadeFactory;
 		[Inject] private PrefabsConfig				_config;
@@ -35,6 +36,7 @@
 			var unit	= _unitFacadeFactory.Create( new() {
 				Prefab	= _config.Units[ type ],
 				Type	= type,
+				Team	= _team,
 			} );
 
 			unit.SetPosition( _view.SpawnPoint.position );
